@@ -38,7 +38,7 @@ db.orders.aggregate([
 ## Output Result:
 - **Orders with "Medium" size details**
 
-my  output Result is :
+
 
 ```jsx
 {
@@ -68,22 +68,20 @@ my  output Result is :
 
 ```
 
-now i wanna filtered by medium size of pizza name and details
 
-```jsx
-db.orders.aggregate([
-// for search by medium list
-{$match:{size:"medium"}},
 
-])
-```
+
 
 - $match  state filter it via medium size
 - and pass data  genated filtered output
 
-- ************************************************Now time to grouped by  name and totalQuantity =************************************************
+# Task 2: Grouping by Pizza Name and Total Quantity
+###  To group medium-sized orders by pizza name and calculate the total quantity:
 
-```bash
+
+```
+
+
 db.orders.aggregate( [
 
    // Stage 1: Filter pizza order documents by pizza size
@@ -99,7 +97,7 @@ db.orders.aggregate( [
 ] )
 ```
 
-****************here is my output:****************
+### Output Result:
 
 ```jsx
 [
@@ -109,16 +107,15 @@ db.orders.aggregate( [
 ]
 ```
 
-same way i wanna get small size of orderQuantity:
+- Cheese: Total Quantity - 50
+- Vegan: Total Quantity - 10
+- Pepperoni: Total Quantity - 20
 
-```jsx
-db.orders.aggregate([
-{$match:{size:"small"}},
-{$group:{_id:"$name",totalQuatity:{$sum:"$quantity"}}}
-])
-```
 
-this is your  Result: Am I Right?
+
+
+
+## this is your  Result: Am I Right?
 
 ```jsx
 [{
@@ -134,8 +131,8 @@ this is your  Result: Am I Right?
   totalQuatity: 15
 }]
 ```
-
-**can you find out total small size order  medium size order or large order?** 
+# Task 3: Total Small and Medium Size Orders
+**To group small and medium-sized orders by pizza name and calculate the total order quantities:**
 
 let’s try it
 
@@ -184,4 +181,6 @@ averageOrderQuantity: { $avg: "$quantity" }
  ] )
 
 ```
+
+
 

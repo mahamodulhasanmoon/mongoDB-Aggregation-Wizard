@@ -1,186 +1,60 @@
-# Aggregation Pipeline Example
+# MongoDB Aggregation Framework
 
-## Here is Some sample Data  which I imported my Database:
+Welcome to the **MongoDB Aggregation Framework** repository! This repository provides a comprehensive guide and examples for utilizing MongoDB's powerful Aggregation Framework to perform advanced data processing, filtering, grouping, and more. Whether you're a beginner or an experienced MongoDB user, this repository aims to help you master the art of data aggregation.
 
-```json
-db.orders.insertMany( [
-   { _id: 0, name: "Pepperoni", size: "small", price: 19,
-     quantity: 10, date: ISODate( "2021-03-13T08:14:30Z" ) },
-   { _id: 1, name: "Pepperoni", size: "medium", price: 20,
-     quantity: 20, date : ISODate( "2021-03-13T09:13:24Z" ) },
-   { _id: 2, name: "Pepperoni", size: "large", price: 21,
-     quantity: 30, date : ISODate( "2021-03-17T09:22:12Z" ) },
-   { _id: 3, name: "Cheese", size: "small", price: 12,
-     quantity: 15, date : ISODate( "2021-03-13T11:21:39.736Z" ) },
-   { _id: 4, name: "Cheese", size: "medium", price: 13,
-     quantity:50, date : ISODate( "2022-01-12T21:23:13.331Z" ) },
-   { _id: 5, name: "Cheese", size: "large", price: 14,
-     quantity: 10, date : ISODate( "2022-01-12T05:08:13Z" ) },
-   { _id: 6, name: "Vegan", size: "small", price: 17,
-     quantity: 10, date : ISODate( "2021-01-13T05:08:13Z" ) },
-   { _id: 7, name: "Vegan", size: "medium", price: 18,
-     quantity: 10, date : ISODate( "2021-01-13T05:10:13Z" ) }
-] )
-```
+## Table of Contents
 
-## Notes: in this Database there is an ordered list of fastfood like pizza pepperoni,cheese,vegan, and there is 3 type of size “small” ,”medium” and “large”
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
 
-<br>
+## Introduction
 
-# Task 1: Filtering by Medium Size Orders
-**To filter orders with a medium size:**
+The MongoDB Aggregation Framework is a powerful tool that enables complex data transformations and analyses directly within the database. This repository aims to provide a step-by-step guide and real-world examples to help you understand and harness the potential of the Aggregation Framework.
 
-```bash
-db.orders.aggregate([
-{$match:{size:"medium"}}
-])
-```
-## Output Result:
-- **Orders with "Medium" size details**
+## Getting Started
 
+To get started with the MongoDB Aggregation Framework, follow these steps:
 
+1. Clone this repository to your local machine.
+2. Install MongoDB on your system if you haven't already.
+3. Explore the provided code examples and documentation.
 
-```jsx
-{
-  _id: 1,
-  name: 'Pepperoni',
-  size: 'medium',
-  price: 20,
-  quantity: 20,
-  date: 2021-03-13T09:13:24.000Z
-},
-{
-  _id: 4,
-  name: 'Cheese',
-  size: 'medium',
-  price: 13,
-  quantity: 50,
-  date: 2022-01-12T21:23:13.331Z
-},
-{
-  _id: 7,
-  name: 'Vegan',
-  size: 'medium',
-  price: 18,
-  quantity: 10,
-  date: 2021-01-13T05:10:13.000Z
-}
+## Usage
 
-```
+This repository contains:
+
+- Detailed explanations of the MongoDB Aggregation Framework components.
+- Code snippets for various aggregation stages and operators.
+- Practical examples for common use cases and scenarios.
+- Tips and best practices for optimizing performance.
+
+## Notes with Example
+
+Explore various use cases and real-world scenarios using the MongoDB Aggregation Framework:
+
+1. [Aggregation pipeline](aggregations/pipeline.md)
 
 
+## Contributing
 
+Contributions to this repository are welcome! If you have insights, improvements, or additional examples to share, follow these steps:
 
+1. Fork this repository.
+2. Create a new branch for your contributions.
+3. Make your changes and commit them.
+4. Push your changes to your forked repository.
+5. Open a pull request to this repository's `main` branch.
 
-- $match  state filter it via medium size
-- and pass data  genated filtered output
+Please follow the [contribution guidelines](CONTRIBUTING.md) for a smooth collaboration.
 
-# Task 2: Grouping by Pizza Name and Total Quantity
-###  To group medium-sized orders by pizza name and calculate the total quantity:
+## License
 
+This repository is licensed under the [MIT License](LICENSE).
 
-```
+---
 
-
-db.orders.aggregate( [
-
-   // Stage 1: Filter pizza order documents by pizza size
-   {
-      $match: { size: "medium" }
-   },
-
-   // Stage 2: Group remaining documents by pizza name and calculate total quantity
-   {
-      $group: { _id: "$name", totalQuantity: { $sum: "$quantity" } }
-   }
-
-] )
-```
-
-### Output Result:
-
-```jsx
-[
-   { _id: 'Cheese', totalQuantity: 50 },
-   { _id: 'Vegan', totalQuantity: 10 },
-   { _id: 'Pepperoni', totalQuantity: 20 }
-]
-```
-
-- Cheese: Total Quantity - 50
-- Vegan: Total Quantity - 10
-- Pepperoni: Total Quantity - 20
-
-
-
-
-
-## this is your  Result: Am I Right?
-
-```jsx
-[{
-  _id: 'Vegan',
-  totalQuatity: 10
-},
-{
-  _id: 'Pepperoni',
-  totalQuatity: 10
-},
-{
-  _id: 'Cheese',
-  totalQuatity: 15
-}]
-```
-# Task 3: Total Small and Medium Size Orders
-**To group small and medium-sized orders by pizza name and calculate the total order quantities:**
-
-let’s try it
-
-```jsx
-db.orders.aggregate([
-{$match:{size:{$in:["small","medium"]}}},
-{$group:{_id:"$name",totalQuatity:{$sum:"$quantity"}}}
-])
-```
-
-**wow great :**
-
-**can you calculate total  order between 2 dates?**
-
-let’s try it:
-
-first of all 
-
-```jsx
-db.orders.aggregate( [
-
-   // Stage 1: Filter pizza order documents by date range
-   {
-      $match:
-      {
-         "date": { $gte: new ISODate( "2020-01-30" ), $lt: new ISODate( "2022-01-30" ) }
-      }
-   },
-
-   // Stage 2: Group remaining documents by date and calculate results
-   {
-      $group:
-      {
-         _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
-totalOrderValue:{ $sum:{$multiply:["$price","$quantity"]}},
-// make agarage
-averageOrderQuantity: { $avg: "$quantity" }
-      
-      }
-   },
-//format it via decending order
-{
-      $sort: {_id: -1 }
-   }
-
- ] )
-
-```
-
-
-
+We hope this repository helps you become proficient in utilizing the MongoDB Aggregation Framework. Happy aggregating!

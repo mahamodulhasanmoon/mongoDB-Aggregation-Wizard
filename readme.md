@@ -1,6 +1,6 @@
-# Aggregation pipeline
+# Aggregation Pipeline Example
 
-**my database data :**
+## Here is Some sample Data  which I imported my Database:
 
 ```json
 db.orders.insertMany( [
@@ -23,15 +23,20 @@ db.orders.insertMany( [
 ] )
 ```
 
-**Notes: in this Database there is an ordered list of fastfood like pizza pepperoni,cheese,vegan, and there is 3 type of size “small” ,”medium” and “large”**
+## Notes: in this Database there is an ordered list of fastfood like pizza pepperoni,cheese,vegan, and there is 3 type of size “small” ,”medium” and “large”
 
-- if i wanna want to medium size of product:
+<br>
+
+# Task 1: Filtering by Medium Size Orders
+**To filter orders with a medium size:**
 
 ```bash
 db.orders.aggregate([
 {$match:{size:"medium"}}
 ])
 ```
+## Output Result:
+- **Orders with "Medium" size details**
 
 my  output Result is :
 

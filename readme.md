@@ -36,7 +36,7 @@ This repository contains:
 
 Explore various use cases and real-world scenarios using the MongoDB Aggregation Framework:
 
-1. [Aggregation pipeline](aggregations/pipeline.md)
+1. [Aggregation pipeline](agreegations/pipeline.md)
 
 
 ## Contributing

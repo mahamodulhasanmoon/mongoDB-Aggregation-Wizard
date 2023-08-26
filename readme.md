@@ -28,6 +28,7 @@ To get started with the MongoDB Aggregation Framework, follow these steps:
 This repository contains:
 
 - Detailed explanations of the MongoDB Aggregation Framework components.
+
 - Code snippets for various aggregation stages and operators.
 - Practical examples for common use cases and scenarios.
 - Tips and best practices for optimizing performance.

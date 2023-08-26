@@ -99,3 +99,77 @@ This will return the following output:
 ```
 
 In this example, the `$project` operator is used to select only the `product` and `price` fields from the documents in the `sales` collection and exclude the `_id` field. The `1` value indicates that the field should be included in the result set, while `0` indicates that it should be excluded.
+
+## $sort Operator
+
+`sort operator` is stage in MongoDB's aggregation pipeline is used to reorder documents based on specified criteria. It's commonly used to arrange documents in a specific order before further processing or displaying the result
+
+Examples:
+Assuming we have a collection of students documents with the following structure:
+
+```
+{
+  "_id": 1,
+  "name": "Alice",
+  "score": 85
+}
+```
+Sort by a Single Field in Ascending Order:
+
+```
+{
+  $sort: {
+    "score": 1   // Sort by score in ascending order
+  }
+}
+```
+This will arrange the documents based on the "score" field in ascending order.
+
+Sort by a Single Field in Descending Order:
+
+```
+{
+  $sort: {
+    "score": -1   // Sort by score in descending order
+  }
+}
+```
+This will arrange the documents based on the "score" field in descending order.
+
+Sort by Multiple Fields:
+
+```
+{
+  $sort: {
+    "score": -1,  
+    "name": 1       
+  }
+}
+```
+This will first sort the documents by "score" in descending order, and for documents with the same score, it will sort by "name" in ascending order.
+
+Sort by Nested Fields:
+
+```javasecipt
+
+{
+  $sort: {
+    "address.city": 1   // Sort by the city within the nested "address" field
+  }
+}
+``` 
+This will sort documents based on the "city" field within the nested "address" field.
+
+Sorting by Text Index Score:
+
+``` javaScript
+
+{
+  $sort: {
+    "score": { $meta: "textScore" }
+  }
+} 
+```
+If you're using a text index for full-text search, you can sort by the text index score to prioritize the most relevant search results.
+
+Remember that the $sort stage is often used early in the aggregation pipeline to arrange documents before applying further transformations or analyses. Sorting can impact performance, especially on large datasets, so it's important to use it strategically based on your application's needs.

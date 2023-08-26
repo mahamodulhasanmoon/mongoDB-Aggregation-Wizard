@@ -138,7 +138,7 @@ This will arrange the documents based on the "score" field in descending order.
 
 Sort by Multiple Fields:
 
-```
+``` bash
 {
   $sort: {
     "score": -1,  
@@ -150,7 +150,7 @@ This will first sort the documents by "score" in descending order, and for docum
 
 Sort by Nested Fields:
 
-```javasecipt
+```javaScript
 
 {
   $sort: {

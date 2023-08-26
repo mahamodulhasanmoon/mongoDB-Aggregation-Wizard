@@ -6,7 +6,7 @@
 
 Here's an example of using `$Match` operator in MongoDB:
 
-```bash
+``` javaScript
 db.collection.aggregate([
   { $match: { field: { $gt: 5 } } }
 ])
@@ -19,7 +19,7 @@ This will return all the documents in the `collection` where the value of the `f
 
 - `$group` operator is used in MongoDB to group documents by a specific field and apply aggregate functions to each group. For example, you can group a collection of sales by product and calculate the total revenue for each product using the `$sum` aggregation function. The syntax for using the `$group` operator is as follows:
 
-```bash
+``` javascript
 db.collection.aggregate([
   { $group: { _id: "$field", newField: { $sum: "$value" } } }
 ])
@@ -107,7 +107,7 @@ In this example, the `$project` operator is used to select only the `product` an
 Examples:
 Assuming we have a collection of students documents with the following structure:
 
-```
+``` json
 {
   "_id": 1,
   "name": "Alice",
@@ -116,7 +116,7 @@ Assuming we have a collection of students documents with the following structure
 ```
 Sort by a Single Field in Ascending Order:
 
-```
+``` shell
 {
   $sort: {
     "score": 1   // Sort by score in ascending order
@@ -127,7 +127,7 @@ This will arrange the documents based on the "score" field in ascending order.
 
 Sort by a Single Field in Descending Order:
 
-```
+``` javaScript
 {
   $sort: {
     "score": -1   // Sort by score in descending order

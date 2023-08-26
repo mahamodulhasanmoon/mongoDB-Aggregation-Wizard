@@ -1,3 +1,5 @@
+# pipeline operators
+
 ## **Match operator**
 
 - The `$match` operator in MongoDB is used to filter documents based on specified criteria. In the given example, the operator is used to retrieve all the documents in the `collection` where the value of the `field` is greater than `5`.
@@ -58,6 +60,8 @@ This will return the following output:
 ```
 
 In this example, the `$group` operator groups the documents by the `product` field and calculates the revenue for each group using the `$sum` aggregation function. The `$multiply` operator is used to multiply the `quantity` and `price` fields for each document before summing them up.
+
+## $Project Operator
 
 The `$project` operator is used to select specific fields from the documents in a collection and return them in the result set. It can also be used to add new fields to the documents or modify the existing fields.
 
